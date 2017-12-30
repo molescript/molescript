@@ -132,9 +132,10 @@ func (l *Lexer) readWord() string {
 
 func (l *Lexer) readNumber() string {
 	start := l.start
-	for isDigit(l.peekChar()) {
+	for isDigit(l.peekChar()) || l.peekChar() == '.' {
 		l.readChar()
 	}
+
 	return l.input[start:l.position]
 }
 

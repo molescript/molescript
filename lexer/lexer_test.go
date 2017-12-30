@@ -6,7 +6,7 @@ import (
 
 func TestNextToken(t *testing.T) {
 	input := `var five = 5;
-var ten = 10;
+var pi = 3.14159265359;
 
 var add = func(x, y) {
   x + y;
@@ -41,9 +41,9 @@ a1.b = c2;
 		{NUMBER, "5"},
 		{SEMICOLON, ";"},
 		{VAR, "var"},
-		{IDENTIFIER, "ten"},
+		{IDENTIFIER, "pi"},
 		{ASSIGN, "="},
-		{NUMBER, "10"},
+		{NUMBER, "3.14159265359"},
 		{SEMICOLON, ";"},
 		{VAR, "var"},
 		{IDENTIFIER, "add"},
