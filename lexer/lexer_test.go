@@ -6,7 +6,8 @@ import (
 
 func TestNextToken(t *testing.T) {
 	input := `var five = 5;
-var pi = 3.14159265359;
+var pi = 3.14159265359; # This is a comment
+# This too is a comment
 
 var add = func(x, y) {
   x + y;

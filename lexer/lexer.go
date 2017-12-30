@@ -17,7 +17,7 @@ func New(input string) *Lexer {
 func (l *Lexer) NextToken() Token {
 	var token Token
 
-	l.skipWhitespace()
+	l.skipIneffective()
 
 	switch l.current {
 	case '(':
@@ -139,9 +139,21 @@ func (l *Lexer) readNumber() string {
 	return l.input[start:l.position]
 }
 
-func (l *Lexer) skipWhitespace() {
-	for l.current == ' ' || l.current == '\t' || l.current == '\n' || l.current == '\r' {
+func (l *Lexer) skipComments() {
+	for l.current != '\n' {
 		l.readChar()
+	}
+}
+
+func (l *Lexer) skipIneffective() {
+	for {
+		if l.current == ' ' || l.current == '\t' || l.current == '\n' || l.current == '\r' {
+			l.readChar()
+		} else if l.current == '#' {
+			l.skipComments()
+		} else {
+			break
+		}
 	}
 }
 
