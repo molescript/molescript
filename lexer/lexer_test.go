@@ -130,16 +130,16 @@ a1.b = c2;
 	l := New(input)
 
 	for i, tt := range tests {
-		tok := l.NextToken()
+		tok := l.ReadToken()
 		//fmt.Println(tests[i], tok.Lexeme)
 		if tok.Type != tt.expectedType {
 			t.Fatalf("tests[%d] - tokentype wrong. expected=%q, got=%q",
 				i, tt.expectedType, tok.Type)
 		}
 
-		if tok.Lexeme != tt.expectedLiteral {
+		if tok.Literal != tt.expectedLiteral {
 			t.Fatalf("tests[%d] - literal wrong. expected=%q, got=%q",
-				i, tt.expectedLiteral, tok.Lexeme)
+				i, tt.expectedLiteral, tok.Literal)
 		}
 	}
 }

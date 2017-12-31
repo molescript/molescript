@@ -6,7 +6,7 @@ import (
 	"io"
 	"runtime"
 
-	"../lexer"
+	"molescript/lexer"
 )
 
 const PROMPT = ">>> "
@@ -25,7 +25,7 @@ func Start(in io.Reader, out io.Writer) {
 		line := scanner.Text()
 		lex := lexer.New(line)
 		for {
-			token := lex.NextToken()
+			token := lex.ReadToken()
 			if token.Type == lexer.EOF {
 				break
 			}

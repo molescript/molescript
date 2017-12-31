@@ -14,7 +14,7 @@ func New(input string) *Lexer {
 	return l
 }
 
-func (l *Lexer) NextToken() Token {
+func (l *Lexer) ReadToken() Token {
 	var token Token
 
 	l.skipIneffective()
@@ -46,7 +46,7 @@ func (l *Lexer) NextToken() Token {
 		if l.peekChar() == '=' {
 			current := l.current
 			l.readChar()
-			token = Token{Type: EQUAL, Lexeme: string(current) + string(l.current)}
+			token = Token{Type: EQUAL, Literal: string(current) + string(l.current)}
 		} else {
 			token = newToken(ASSIGN, l.current)
 		}
@@ -54,7 +54,7 @@ func (l *Lexer) NextToken() Token {
 		if l.peekChar() == '=' {
 			current := l.current
 			l.readChar()
-			token = Token{Type: BANG_EQUAL, Lexeme: string(current) + string(l.current)}
+			token = Token{Type: BANG_EQUAL, Literal: string(current) + string(l.current)}
 		} else {
 			token = newToken(BANG, l.current)
 		}
@@ -62,7 +62,7 @@ func (l *Lexer) NextToken() Token {
 		if l.peekChar() == '=' {
 			current := l.current
 			l.readChar()
-			token = Token{Type: GREATER_EQUAL, Lexeme: string(current) + string(l.current)}
+			token = Token{Type: GREATER_EQUAL, Literal: string(current) + string(l.current)}
 		} else {
 			token = newToken(GREATER, l.current)
 		}
@@ -70,13 +70,13 @@ func (l *Lexer) NextToken() Token {
 		if l.peekChar() == '=' {
 			current := l.current
 			l.readChar()
-			token = Token{Type: LESS_EQUAL, Lexeme: string(current) + string(l.current)}
+			token = Token{Type: LESS_EQUAL, Literal: string(current) + string(l.current)}
 		} else {
 			token = newToken(LESS, l.current)
 		}
 	case 0:
 		token.Type = EOF
-		token.Lexeme = ""
+		token.Literal = ""
 	default:
 		if isLetter(l.current) {
 			lexeme := l.readWord()
@@ -85,11 +85,11 @@ func (l *Lexer) NextToken() Token {
 			} else {
 				token.Type = IDENTIFIER
 			}
-			token.Lexeme = lexeme
+			token.Literal = lexeme
 		} else if isDigit(l.current) {
 			number := l.readNumber()
 			token.Type = NUMBER
-			token.Lexeme = number
+			token.Literal = number
 		} else {
 			token = newToken(ILLEGAL, l.current)
 		}
@@ -99,7 +99,7 @@ func (l *Lexer) NextToken() Token {
 }
 
 func newToken(tokenType TokenType, current byte) Token {
-	return Token{Type: tokenType, Lexeme: string(current)}
+	return Token{Type: tokenType, Literal: string(current)}
 
 }
 
