@@ -5,15 +5,15 @@ import (
 )
 
 func TestNextToken(t *testing.T) {
-	input := `var five = 5;
-var pi = 3.14159265359; # This is a comment
+	input := `five = 5;
+pi = 3.14159265359; # This is a comment
 # This too is a comment
 
-var add = func(x, y) {
+add = func(x, y) {
   x + y;
 };
 
-var result = add(five, ten);
+result = add(five, ten);
 !-/*5;
 5 < 10 > 5;
 
@@ -36,17 +36,14 @@ a1.b = c2;
 		expectedType    TokenType
 		expectedLiteral string
 	}{
-		{VAR, "var"},
 		{IDENTIFIER, "five"},
 		{ASSIGN, "="},
 		{NUMBER, "5"},
 		{SEMICOLON, ";"},
-		{VAR, "var"},
 		{IDENTIFIER, "pi"},
 		{ASSIGN, "="},
 		{NUMBER, "3.14159265359"},
 		{SEMICOLON, ";"},
-		{VAR, "var"},
 		{IDENTIFIER, "add"},
 		{ASSIGN, "="},
 		{FUNCTION, "func"},
@@ -62,7 +59,6 @@ a1.b = c2;
 		{SEMICOLON, ";"},
 		{RIGHT_BRACE, "}"},
 		{SEMICOLON, ";"},
-		{VAR, "var"},
 		{IDENTIFIER, "result"},
 		{ASSIGN, "="},
 		{IDENTIFIER, "add"},

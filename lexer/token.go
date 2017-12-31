@@ -45,7 +45,6 @@ const (
 	SUPER    = "SUPER"
 	THIS     = "THIS"
 	TRUE     = "TRUE"
-	VAR      = "VAR"
 
 	ILLEGAL = "ILLEGAL"
 	EOF     = "EOF"
@@ -65,7 +64,6 @@ var keywords = map[string]TokenType{
 	"super":  SUPER,
 	"this":   THIS,
 	"True":   TRUE,
-	"var":    VAR,
 }
 
 type Token struct {
