@@ -127,7 +127,6 @@ a1.b = c2;
 
 	for i, tt := range tests {
 		tok := l.ReadToken()
-		//fmt.Println(tests[i], tok.Lexeme)
 		if tok.Type != tt.expectedType {
 			t.Fatalf("tests[%d] - tokentype wrong. expected=%q, got=%q",
 				i, tt.expectedType, tok.Type)

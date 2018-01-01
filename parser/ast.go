@@ -22,6 +22,7 @@ type Statement interface {
 
 type Program struct {
 	Statements []Statement
+	Errors     []ParseError
 }
 
 func (p *Program) TokenLiteral() string {
