@@ -7,8 +7,7 @@ import (
 )
 
 func TestLetStatements(t *testing.T) {
-	input := `
-x = 5;
+	input := `x = 5;
 foo 42;
 bar 1337;
 y = 10;
@@ -50,8 +49,8 @@ y = 10;
 		literal  string
 		expected lexer.TokenType
 	}{
-		{0, lexer.NUMBER, "42", lexer.ASSIGN},
-		{0, lexer.NUMBER, "1337", lexer.ASSIGN},
+		{2, lexer.NUMBER, "42", lexer.ASSIGN},
+		{3, lexer.NUMBER, "1337", lexer.ASSIGN},
 	}
 
 	for i, tt := range errTests {
@@ -90,7 +89,7 @@ func testAssignStatement(t *testing.T, s Statement, name string) bool {
 
 func testParseError(t *testing.T, e ParseError, line int, tokType lexer.TokenType, literal string, expected lexer.TokenType) bool {
 	if e.tok.Line != line {
-		t.Errorf("s.Line number not %d. got=%q", line, e.tok.Line)
+		t.Errorf("s.Line number not %d. got=%d", line, e.tok.Line)
 		return false
 	}
 
