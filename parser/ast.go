@@ -69,5 +69,22 @@ func (s *AssignStmt) String() string {
 	}
 
 	return out.String()
+}
 
+type ReturnStmt struct {
+	Token lexer.Token
+	Value Expression
+}
+
+func (s *ReturnStmt) statementNode()       {}
+func (s *ReturnStmt) TokenLiteral() string { return s.Token.Literal }
+func (s *ReturnStmt) String() string {
+	var out bytes.Buffer
+
+	out.WriteString("return ")
+	if s.Value != nil {
+		out.WriteString(s.Value.String())
+	}
+
+	return out.String()
 }

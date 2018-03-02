@@ -61,6 +61,8 @@ func (p *Parser) parseStatement() (Statement, error) {
 	switch p.current.Type {
 	case lexer.IDENTIFIER:
 		return p.parseAssignStatement()
+	case lexer.RETURN:
+		return p.parseReturnStatement()
 	default:
 		msg := fmt.Sprintf("parseStatement() failed, no rule for %s (%s)", p.current.Type, p.current.Literal)
 		return nil, errors.New(msg)
@@ -83,6 +85,18 @@ func (p *Parser) parseAssignStatement() (*AssignStmt, error) {
 
 	return stmt, nil
 
+}
+
+func (p *Parser) parseReturnStatement() (*ReturnStmt, error) {
+	stmt := &ReturnStmt{Token: p.current}
+
+	p.advanceToken()
+
+	for p.current.Type != lexer.SEMICOLON {
+		p.advanceToken()
+	}
+
+	return stmt, nil
 }
 
 func (p *Parser) expectNext(tokenType lexer.TokenType) error {
